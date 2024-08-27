@@ -1,51 +1,45 @@
 
+# mypy - checks the consitency of the type, static type check
+
 class Calculator:
-    def __init__(self):
-        self.init: float = 0.
 
-    def add(self, number: float): #number is a user input
-        self.init += number 
-        return self.init
+    # expecting start_value to be float
+    # expecting that the function returns None (setting up inital state)
+    
+    def __init__(self, start_value: float = 0) -> None: # Initializes the calculator
+        self.current_value = start_value
 
-    def substract(self, number: float):
-        self.init -= number
-        return self.init
+    def add(self, number: float) -> None: # not returning any value, modyfing the iternal state
+        self.current_value += number
 
-    def multiply(self, number: float):
-        self.init *= number
-        return self.init
+    def substract(self, number: float) -> None: 
+        self.current_value -= number
 
-    def divide(self, number: float):
-        self.init /= number
+    def multiply(self, number: float) -> None:
+        self.current_value *= number
+
+    def divide(self, number: float) -> None:
+        self.current_value /= number
         if number == 0:
-            print("Error, you can't divide by 0")
-        return self.init
+            raise ValueError("Error, you can't divide by 0") # expection
 
-    def get(self):
-        print("Current number: ", self.init)
+    def get(self) -> float:
+        return self.current_value
     
-    def reset(self):
-        self.init: float = 0.
-        return self.init 
+    def reset(self) -> None:
+        self.current_value = 0 
     
-
-
-''''
+'''
 obj = Calculator()
 
-obj.add(float(5))
-print("Added number: ", self.init)
+obj.add(5)
 
-obj.substract(float(10))
-print("Substracted number: ", self.init)
+obj.substract(10)
 
-obj.reset()
-obj.multiply(float(-10))
-print("Multiplied number: ", self.init)
+obj.multiply(-10)
 
-obj.divide(float(5))
-print("Divided number: ", self.init)
+obj.divide(5)
 
 obj.get()
+obj.reset()
 '''
-
